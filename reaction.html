@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Reaction Game</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Indie+Flower&display=swap" rel="stylesheet">
+        
+        <style>
+            h1{
+            text-align: center;
+            background-color: aquamarine;
+            font-family: serif;
+            margin: 10px 200px;
+        }
+        h1:hover{
+            background-color: rgb(240, 183, 99);
+        }
+    
+            .menu {
+                background-color: #fffc4b8e;
+                padding: 3px;
+                text-align: center;
+                width: 500px;
+                 margin-left: 300px;
+            }
+            #target {
+                background-color: rgba(254, 100, 149, 0.941);
+                font-family: "fantasy";
+                font-weight: 800;
+                font-size: 18px;
+                margin: 6px;
+            }
+            #countdown {
+                background-color: rgb(247, 173, 117);
+                font-family: "fantasy";
+                font-weight: 800;
+                font-size: 18px;
+                margin: 6px;
+            }
+            button {
+                margin: 20px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+      <body style="background-color: #f6e5a8c8;"></body>
+        <div class="container text-center">
+            <h1>Thakellapati Sai Charan Reaction Timer</h1>
+            <div style="background-color:#d0f398c8">
+            <div class="row menu">
+                <div class="col-md">
+                    <p id="target">Your time</p>
+                </div>
+                <div class="col-md">
+                    <p id="countdown">Count</p>
+                </div>
+            </div>
+            <div class="container text-center">
+                <button class="btn btn-warning" type="submit" onclick="startTime()">Start Timer</button>
+                <button class="btn btn-success" type="submit" onclick="recordReact()">React Now</button>
+            </div>
+        </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script> 
+            var countdown = document.getElementById("countdown")
+            var target = document.getElementById("target")
+          
+            let myTime = undefined
+            let buttonTime = undefined
+            let elapsedTime = undefined
+          
+            function startTime()
+            {
+              var randTimer = Math.floor(Math.random()*9)+2 //random 2-10
+          
+              myTime = undefined //reset timer for multiple uses
+              for(let i=0;i<=randTimer;i++)
+              {
+                setTimeout(() => {
+                  countdown.innerHTML = "Count: " + i
+                  //console.log("Count: " + i)
+                }, 
+                  ((randTimer-i)*1000)
+                );
+                
+              }
+              setTimeout(function() {
+                if (myTime === undefined) {
+                  target.innerHTML = "Too Slow"
+                } else {
+                  buttonTime = Date.now()
+                  elapsedTime = -(myTime - buttonTime)
+                  target.innerHTML = "Time was " + elapsedTime + "ms"
+                }
+              }, randTimer*1000)
+          
+          
+            }
+          
+            function recordReact()
+            {
+              myTime = Date.now()
+              console.log("Start time: " + myTime)
+          
+            }
+            </script>
+
+
+</body>
+</html>
